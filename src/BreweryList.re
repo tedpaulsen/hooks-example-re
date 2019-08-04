@@ -9,19 +9,20 @@ let make = (~region) => {
 
   React.useEffect1(
     () => {
-      Js.Promise.(
-        Axios.get(url(region))
-        |> then_(response => {
-             Js.log("got response for " ++ region);
-             resolve(setBreweries(response##data));
-           })
-      );
+      let _ =
+        Js.Promise.(
+          Axios.get(url(region))
+          |> then_(response => {
+               Js.log("got response for " ++ region);
+               resolve(setBreweries(response##data));
+             })
+        );
       None;
     },
     [|region|],
   );
 
-  let rec renderBrewery = brw => {
+  let renderBrewery = brw => {
     <div
       key={
         brw##id;
