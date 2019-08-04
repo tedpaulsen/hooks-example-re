@@ -9,21 +9,25 @@ let make = (~region) => {
 
   React.useEffect1(
     () => {
-      Js.log2("running effect", region)
       Js.Promise.(
         Axios.get(url(region))
-        |> then_(response => resolve(setBreweries(response##data)))
-        |> catch(error => resolve(Js.log(error)))
+        |> then_(response => {
+             resolve(setBreweries(response##data));
+           })
       );
       None;
     },
     [|region|],
   );
 
+  Js.log(breweries);
+
   <div>
-    // {breweries
-    //  |> List.map(b => <div> {ReasonReact.string("b")} </div>)
-    //  |> Array.of_list
-    //  |> ReasonReact.array}
+    // {
+    //   breweries |>
+    //   List.map(b => <div>{ReasonReact.string(b##name)}</div>) |>
+    //   Array.of_list |>
+    //   React.array
+    // }
   </div>;
 };

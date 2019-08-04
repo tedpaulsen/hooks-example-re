@@ -17,14 +17,12 @@ function BreweryList(Props) {
         }));
   var setBreweries = match[1];
   React.useEffect((function () {
-          console.log("running effect", region);
           Axios.get(url(region)).then((function (response) {
-                    return Promise.resolve(Curry._1(setBreweries, response.data));
-                  })).catch((function (error) {
-                  return Promise.resolve((console.log(error), /* () */0));
+                  return Promise.resolve(Curry._1(setBreweries, response.data));
                 }));
           return undefined;
         }), /* array */[region]);
+  console.log(match[0]);
   return React.createElement("div", undefined);
 }
 
