@@ -67,6 +67,6 @@ let make = () => {
           )
        |> ReasonReact.array}
     </select>
-    <BreweryList region=region/>
+    <BreweryList region/>
   </div>;
 };

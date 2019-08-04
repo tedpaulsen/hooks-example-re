@@ -5,13 +5,14 @@ let url = region => {
 
 [@react.component]
 let make = (~region) => {
-  let (breweries, setBreweries) = React.useState(() => []);
+  let (breweries, setBreweries) = React.useState(() => [||]);
 
   React.useEffect1(
     () => {
       Js.Promise.(
         Axios.get(url(region))
         |> then_(response => {
+             Js.log("got response for " ++ region);
              resolve(setBreweries(response##data));
            })
       );
@@ -20,14 +21,14 @@ let make = (~region) => {
     [|region|],
   );
 
-  Js.log(breweries);
+  let rec renderBrewery = brw => {
+    <div
+      key={
+        brw##id;
+      }> {ReasonReact.string(brw##name)} </div>;
+  };
 
-  <div>
-    // {
-    //   breweries |>
-    //   List.map(b => <div>{ReasonReact.string(b##name)}</div>) |>
-    //   Array.of_list |>
-    //   React.array
-    // }
+  <div className="items">
+    {breweries |> Array.map(renderBrewery) |> ReasonReact.array}
   </div>;
 };
