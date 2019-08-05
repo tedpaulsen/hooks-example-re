@@ -19,14 +19,13 @@ function BreweryList(Props) {
   var setBreweries = match[1];
   React.useEffect((function () {
           Axios.get(url(region)).then((function (response) {
-                  console.log("got response for " + region);
                   return Promise.resolve(Curry._1(setBreweries, response.data));
                 }));
           return undefined;
         }), /* array */[region]);
   var renderBrewery = function (brw) {
     return React.createElement("div", {
-                key: brw.id
+                key: String(brw.id)
               }, brw.name);
   };
   return React.createElement("div", {
